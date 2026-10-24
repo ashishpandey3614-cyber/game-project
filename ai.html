@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My AI Agent</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            display: flex;    
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        .chat {
+            width: 1000px;
+            background: rgb(99, 147, 206);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px #aaa;
+        }
+
+        #messages {
+            height: 350px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 75%;
+            padding: 10px;
+             border-radius: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+            background: #4134a2;
+            color: white;
+            border: none;
+            border-radius: 100px;
+        }
+        button:hover {
+            background: #9e85e6;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="chat">
+    <h2>🤖 My AI Agent</h2>
+
+    <div id="messages"></div>
+
+    <input id="userInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+     function calculate(expression) {
+    if (!/^[0-9+\-*/%.()\s]+$/.test(expression)) {
+        return "Invalid calculation";
+    }
+
+    try {
+        return Function('"use strict"; return (' + expression + ')')();
+    }catch (error) {
+        return "Calculation samajh nahi aayi";
+    }    
+}
+function sendMessage() {
+
+    let input = document.getElementById("userInput");
+    let message = input.value;
+
+    if (message === "") return;
+
+    let messages = document.getElementById("messages");
+
+    // User message
+    messages.innerHTML += `
+        <p><b>You:</b> ${message}</p>
+    `;
+
+    // Simple Agent
+    let reply = "";
+
+    if (message.toLowerCase().includes("hello")) {
+        reply = "Hello 👋 Main aapka AI Agent hoon.";
+    }
+    else if (message.toLowerCase().includes("name")) {
+        reply = "Mera naam My AI Agent hai.";
+    }
+    else if (message.toLowerCase().includes("java")) {
+        reply = "Java ek popular programming language hai. Iska use websites, mobile applications, desktop software aur bade software systems banane ke liye kiya jata hai. Java ek Object-Oriented Programming language hai, jisme program ko classes aur objects ki help se organize kiya jata hai. Java ko seekhne se coding aur problem-solving skills improve hoti hain. Java ke saath Data Structures aur Algorithms seekhna bhi programming career ke liye bahut useful hai.";
+    }
+    else if (message.toLowerCase().includes("python")) {
+        reply = "Python ek programming language hai.";
+    }
+     else if (message.toLowerCase().includes("hackathon")) {
+        reply = "Hackathon ek event hai jahan log milkar software ya hardware projects banate hain.";
+    }
+     else if (message.toLowerCase().includes("hame ai ka use kyu karna chahiye")) {
+        reply = "AI yani Artificial Intelligence ka use hume apne kaam ko fast aur easy banane ke liye karna chahiye. AI ki help se hum information jaldi find kar sakte hain, difficult problems ko samajh sakte hain aur repetitive tasks ko automate kar sakte hain. Students AI ka use learning, coding aur naye ideas develop karne ke liye kar sakte hain. Lekin AI par completely depend nahi hona chahiye; hume apni thinking aur skills ko bhi develop karna chahiye.";
+    }
+   
+    else {
+        reply = "Mujhe abhi ye baat samajh nahi aayi 😅";
+    }
+
+    // Agent reply
+messages.innerHTML += `
+    <p><b>Agent:</b> ${reply}</p>
+`;
+
+let result = calculate(message);
+
+messages.innerHTML += `
+    <p><b>Agent:</b> ${result}</p>
+`;
+}
+
+</script>
+
+</body>
+</html>
